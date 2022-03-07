@@ -1,2 +1,2 @@
 # ivs_project2
-2. projekt předmětu ivs.
+VUT FIT IVS Projekt 2
