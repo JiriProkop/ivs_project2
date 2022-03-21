@@ -7,11 +7,11 @@ Windows 64bit
 Autori
 ------
 
-Nazev tymu
-- xlogin01 jmeno prijmeni 
-- xlogin02 jmeno prijmeni 
-- xlogin03 jmeno prijmeni 
-- xlogin04 jmeno prijmeni 
+Nazev tymu: Gde_body
+
+- xcerba Patrik Čerbák 
+- xproko47 Jiří Prokop 
+- xczajk01 Štěpán Czajkowski 
 
 Licence
 -------
