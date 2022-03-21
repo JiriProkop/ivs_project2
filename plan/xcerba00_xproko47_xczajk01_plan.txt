@@ -1,0 +1,17 @@
+Termíny
+    31. 3. - hotove testy, začátek práce na knihovně 
+    10. 4. - hotove funkce
+    17. 4. - hotovy projekt
+
+Úkoly
+    Štěpán(xczajk01) - /, x**y(mocnina s přirozeným mocnitelem), +, testy pro Patrika
+    Patrik(xcerba00) - sqrt, -, směrodatná odchylka, testy pro Jirku
+    Jirka(xproko47) - *, !, případná pomoc/leader, testy pro Štěpána
+
+Kom. kanály
+    Discord
+        Pravidla: Kontrola zpráv alespoň jednou denně.
+
+Systém pro správu verzí a hosting
+    GitHub
+        Přístup: na email xproko47@stud.fit.vutbr.cz poslat GitHub username nebo email spojený s GitHub účtem
