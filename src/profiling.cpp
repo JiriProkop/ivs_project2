@@ -1,4 +1,4 @@
-#include<iostream>
+#include <iostream>
 
 int main() {
 	cout << "Sample profiling source code" << endl;
