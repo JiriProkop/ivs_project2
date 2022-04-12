@@ -17,7 +17,7 @@ TEST(plus, normal_values)
     EXPECT_EQ(add(10, 22), 32);
 }
 
-TEST(minus, desetina cisla) {
+TEST(minus, desetina_cisla) {
     EXPECT_TRUE(compare_double(sub(4.6, 0.2), 4.4));
     EXPECT_TRUE(compare_double(sub(4.6, 0.2), 4.4));
 }
