@@ -9,7 +9,7 @@ Autori
 
 Nazev tymu: Gde_body
 
-- xcerba Patrik Čerbák 
+- xcerba00 Patrik Čerbák - PCerD01
 - xproko47 Jiří Prokop 
 - xczajk01 Štěpán Czajkowski 
 
