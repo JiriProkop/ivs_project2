@@ -17,9 +17,11 @@ TEST(plus, normal_values)
     EXPECT_EQ(add(10, 22), 32);
 }
 
-TEST(minus, neco) {
+TEST(minus, desetina cisla) {
     EXPECT_TRUE(compare_double(sub(4.6, 0.2), 4.4));
+    EXPECT_EQUAL(compare_double(sub(4.6, 0.2), 4.4));
 }
+
 
 TEST(odmocnina, randomtest) {
     EXPECT_EQ(nth_root(4, 2), 2);
