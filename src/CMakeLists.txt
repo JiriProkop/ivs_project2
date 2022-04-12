@@ -1,11 +1,9 @@
-cmake_minimum_required(VERSION 3.12) # version can be different
+cmake_minimum_required(VERSION 3.14)
+project(calc)
+set(CMAKE_CXX_STANDARD 11)
 
-project(calc) #name of project
-
-add_subdirectory(googletest) # googletest subdirectory
-
-include_directories(googletest/include) # this is so we can #include <gtest/gtest.h>
+add_subdirectory(googletest)
+include_directories(googletest/include)
 
 add_executable(calc_tests calc_tests.cpp)
-
-target_link_libraries(calc_tests PRIVATE gtest) # link google test to this executable
+target_link_libraries(calc_tests gtest_main)
