@@ -47,10 +47,10 @@ TEST(minus, rationals) {
 
 
 TEST(nth_root, positive_even_roots){
-    EXPECT_EQ(nth_root(4, 2), 2);
-    EXPECT_EQ(nth_root(256, 2), 16);
-    EXPECT_EQ(nth_root(117649, 6), 7);
-    EXPECT_EQ(nth_root(1048576, 20), 2);
+    EXPECT_TRUE(compare_double(nth_root(4, 2), 2));
+    EXPECT_TRUE(compare_double(nth_root(256, 2), 16));
+    EXPECT_TRUE(compare_double(nth_root(117649, 6), 7));
+    EXPECT_TRUE(compare_double(nth_root(1048576, 20), 2));
     EXPECT_TRUE(nth_root(compare_double(1.0/5.0, 2), 0.44721359));
     EXPECT_TRUE(nth_root(compare_double(1.0/3.0, 16), 0.93364101));
     EXPECT_ANY_THROW(nth_root(-2,2));
@@ -75,9 +75,9 @@ TEST(nth_root, negative_even_roots){
 }
 
 TEST(nth_root, positive_odd_roots){
-    EXPECT_EQ(nth_root(8, 3), 2);
-    EXPECT_EQ(nth_root(-8, 3), -2);
-    EXPECT_EQ(nth_root(-3125, 5), -5);
+    EXPECT_TRUE(compare_double(nth_root(8, 3), 2));
+    EXPECT_TRUE(compare_double(nth_root(-8, 3), -2));
+    EXPECT_TRUE(compare_double(nth_root(-3125, 5), -5));
     EXPECT_TRUE(compare_double(nth_root(12, 7), 1.42616163));
     EXPECT_TRUE(compare_double(nth_root(-12, 7), -1.42616163));
     EXPECT_TRUE(compare_double(nth_root(29.0/19.0, 7), 1.06226999));
