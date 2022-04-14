@@ -9,12 +9,7 @@
  * @return Returns true if the numbers are equal.
  */
 bool compare_double(double a, double b) {
-    return fabs(a - b) < 0.000001;
-}
-
-TEST(plus, normal_values)
-{
-    EXPECT_EQ(add(10, 22), 32);
+    return fabs(a - b) < ACCURACY;
 }
 
 TEST(minus, decimals) {
@@ -117,4 +112,39 @@ TEST(nth_root, negatative_fractional_decimal_roots){
     EXPECT_ANY_THROW(nth_root(-7,-2.8));
     EXPECT_TRUE(compare_double(nth_root(1.0/4.0, -0.9), 4.66611615));
     EXPECT_TRUE(compare_double(nth_root(-1.0/4.0, 1.8), -2.16011947));
+}
+ 
+TEST(plus, integers)
+{
+   EXPECT_TRUE(compare_double(plus(2, 8), 10));
+   EXPECT_TRUE(compare_double(plus(0, 0), 0));
+   EXPECT_TRUE(compare_double(plus(-25, -1), -26));
+   EXPECT_TRUE(compare_double(plus(-12, 0), -12));
+   EXPECT_TRUE(compare_double(plus(-1239, 1239), 0));
+   EXPECT_TRUE(compare_double(plus(123435, 659486), 782921));
+   EXPECT_TRUE(compare_double(plus(-42434, -192018), -234452));
+}
+ 
+TEST(plus, doubles)
+{
+   EXPECT_TRUE(compare_double(plus(21.0, 56.0), 77.0));
+   EXPECT_TRUE(compare_double(plus(0.1, 0.1), 0.2));
+   EXPECT_TRUE(compare_double(plus(42.69, 42.69), 85.38));
+   EXPECT_TRUE(compare_double(plus(1231.32131, 1231.31414), 2462.63545));
+   EXPECT_TRUE(compare_double(plus(10 * ACCURACY, 10 * ACCURACY), 20 * ACCURACY));
+   EXPECT_TRUE(compare_double(plus(234.3564025, 234.3564025), 2 * 234.3564025));
+}
+
+TEST(plus, spicy_values)
+{
+    EXPECT_ANY_THROW(plus(DBL_MAX, 2));
+    EXPECT_ANY_THROW(plus(DBL_MAX/2.0, DBL_MAX/2.0 + 1));
+    EXPECT_TRUE(compare_double(plus(DBL_MAX/2.0, DBL_MAX/2.0), DBL_MAX));
+    EXPECT_TRUE(compare_double(plus(DBL_MAX -2, 2), DBL_MAX));
+
+    EXPECT_ANY_THROW(plus(DBL_MAX, DBL_MIN));
+
+    EXPECT_ANY_THROW(plus(DBL_MIN, -1));
+    EXPECT_ANY_THROW(plus(DBL_MIN*2.0, -DBL_MIN*2.0 - 1));
+    EXPECT_TRUE(compare_double(plus(DBL_MIN*2.0, DBL_MIN*2.0), 2.0 * DBL_MIN));
 }

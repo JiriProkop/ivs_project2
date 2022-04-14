@@ -1,12 +1,10 @@
-#include <cmath>
-
 #ifndef _CALC_FUNCS_H
 #define _CALC_FUNCS_H
 
-int add(int a, int b)
-{
-    return a + b;
-}
+#include <cmath>
+#include <float.h>
+
+#define ACCURACY 0.000001
 
 /**
  * A function for calculating the subtraction of two numbers.
