@@ -229,3 +229,33 @@ TEST(nth_power, spicy_values)
 
     EXPECT_TRUE(compare_double(nth_power(2, 1.0), 2));
 }
+
+TEST(mul, integers)
+{
+    EXPECT_TRUE(compare_double(mul(2, 3), 6));
+    EXPECT_TRUE(compare_double(mul(-2, 3), -6));
+    EXPECT_TRUE(compare_double(mul(23, -345), -7935));
+    EXPECT_TRUE(compare_double(mul(0, 999999), 0));
+    EXPECT_TRUE(compare_double(mul(24523452, 0), 0));
+    EXPECT_TRUE(compare_double(mul(420, 69), 28980));
+}
+
+TEST(mul, doubles)
+{
+    EXPECT_TRUE(compare_double(mul(2.0, 3.0), 6.0));
+    EXPECT_TRUE(compare_double(mul(-0.1, 0.1), -0.01));
+    EXPECT_TRUE(compare_double(mul(23.342523, -0.124341234), -2.902438114));
+    EXPECT_TRUE(compare_double(mul(0.0, 999.999), 0.0));
+    EXPECT_TRUE(compare_double(mul(12341.132, 0.00000000), 0.0));
+    EXPECT_TRUE(compare_double(mul(1234.5678, 69432), 85718511.49));
+    EXPECT_TRUE(compare_double(mul(563456.5678, 0.01), 5634.565678));
+}
+
+TEST(fac, factorial)
+{
+    EXPECT_EQ(fac(10), 3628800);
+    EXPECT_ANY_THROW(fac(-10));
+    EXPECT_EQ(fac(13), 6227020800);
+    EXPECT_EQ(fac(20), 2.432902e+18);
+    EXPECT_EQ(fac(30), 2.6525286e+32);
+}
