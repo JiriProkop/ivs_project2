@@ -207,8 +207,8 @@ TEST(nth_power, integer_base)
     EXPECT_TRUE(compare_double(nth_power(-1, 2), 1));
     EXPECT_TRUE(compare_double(nth_power(5, 2), 25));
     EXPECT_TRUE(compare_double(nth_power(-3, 9), -19683));
-    EXPECT_TRUE(compare_double(nth_power(1, 63635777747458878686868688648), 1));
-    EXPECT_TRUE(compare_double(nth_power(0, 366465473477673737567), 0));
+    EXPECT_TRUE(compare_double(nth_power(1, 6363577774745887868), 1));
+    EXPECT_TRUE(compare_double(nth_power(0, 3664654734776737377), 0));
 }
 
 TEST(nth_power, double_base)

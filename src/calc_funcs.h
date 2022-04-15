@@ -72,4 +72,29 @@ double nth_power(double a, double b){
     return pow(a, b);
 }
 
+/**
+ * A function for multiplying two numbers.
+ * a*b
+ *
+ * @param a multiplier
+ * @param b multiplied number
+ * @return Returns the value of expression a*b.
+ */
+double mul(double a, double b)
+{
+    return a * b;
+}
+
+/**
+ * A function for multiplying two numbers.
+ * a!
+ *
+ * @param a factorial argument
+ * @return Returns the value of expression a! .
+ */
+double fac(double n)
+{
+    return std::tgamma(n + 1);;
+}
+
 #endif
