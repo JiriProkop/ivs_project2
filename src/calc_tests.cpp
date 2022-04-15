@@ -1,16 +1,6 @@
 #include <gtest/gtest.h>
 #include "calc_funcs.h"
 
-/**
- * A function for comparing two double values with the accuracy of 0.000001.
- *
- * @param a First value.
- * @param b Second value.
- * @return Returns true if the numbers are equal.
- */
-bool compare_double(double a, double b) {
-    return fabs(a - b) < ACCURACY;
-}
 
 TEST(minus, decimals) {
     EXPECT_TRUE(compare_double(sub(4.6, 4.6), 0));
@@ -156,7 +146,7 @@ TEST(divide, integers_whole_results)
     EXPECT_TRUE(compare_double(divide(0, 1500), 0));
     EXPECT_TRUE(compare_double(divide(-1500, -1), 1500));
     EXPECT_TRUE(compare_double(divide(128, -2), -64));
-    EXPECT_TRUE(compare_double(divide(-12100, 110), 110));
+    EXPECT_TRUE(compare_double(divide(-12100, 110), -110));
 }
 
 TEST(divide, integers_not_whole_results)
@@ -184,9 +174,9 @@ TEST(divide, doubles_whole_results)
 TEST(divide, doubles_not_whole_results)
 {
     EXPECT_TRUE(compare_double(divide(12.646, 1.465), 8.6320819113));
-    EXPECT_TRUE(compare_double(divide(-1.21, -1.1), -1.1));
+    EXPECT_TRUE(compare_double(divide(-1.21, -1.1), 1.1));
     EXPECT_TRUE(compare_double(divide(20.48, -6.4), -3.2));
-    EXPECT_TRUE(compare_double(divide(115.311, 61.1316), 18862748562));
+    EXPECT_TRUE(compare_double(divide(115.311, 61.1316), 1.8862748562));
     EXPECT_TRUE(compare_double(divide(5362.00709808, 1.2345), 4343.46464));
 }
 
@@ -247,7 +237,7 @@ TEST(mul, doubles)
     EXPECT_TRUE(compare_double(mul(23.342523, -0.124341234), -2.902438114));
     EXPECT_TRUE(compare_double(mul(0.0, 999.999), 0.0));
     EXPECT_TRUE(compare_double(mul(12341.132, 0.00000000), 0.0));
-    EXPECT_TRUE(compare_double(mul(1234.5678, 69432), 85718511.49));
+    EXPECT_TRUE(compare_double(mul(1234.5678, 69432), 85718511.4896));
     EXPECT_TRUE(compare_double(mul(563456.5678, 0.01), 5634.565678));
 }
 
@@ -256,6 +246,6 @@ TEST(fac, factorial)
     EXPECT_EQ(fac(10), 3628800);
     EXPECT_ANY_THROW(fac(-10));
     EXPECT_EQ(fac(13), 6227020800);
-    EXPECT_EQ(fac(20), 2.432902e+18);
-    EXPECT_EQ(fac(30), 2.6525286e+32);
+    EXPECT_EQ(fac(20), 2.432902008176640000e+18);
+    EXPECT_ANY_THROW(fac(30));
 }
