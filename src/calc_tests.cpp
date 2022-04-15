@@ -148,3 +148,84 @@ TEST(plus, spicy_values)
     EXPECT_ANY_THROW(plus(DBL_MIN*2.0, -DBL_MIN*2.0 - 1));
     EXPECT_TRUE(compare_double(plus(DBL_MIN*2.0, DBL_MIN*2.0), 2.0 * DBL_MIN));
 }
+
+TEST(divide, integers_whole_results)
+{
+    EXPECT_TRUE(compare_double(divide(120, 6), 20));
+    EXPECT_TRUE(compare_double(divide(30, 15), 2));
+    EXPECT_TRUE(compare_double(divide(0, 1500), 0));
+    EXPECT_TRUE(compare_double(divide(-1500, -1), 1500));
+    EXPECT_TRUE(compare_double(divide(128, -2), -64));
+    EXPECT_TRUE(compare_double(divide(-12100, 110), 110));
+}
+
+TEST(divide, integers_not_whole_results)
+{
+    EXPECT_TRUE(compare_double(divide(69, 42), 1.6428571429));
+    EXPECT_TRUE(compare_double(divide(13, 2), 6.5));
+    EXPECT_TRUE(compare_double(divide(21, -42), -0.5));
+    EXPECT_TRUE(compare_double(divide(121, 13), 9.3076923077));
+    EXPECT_TRUE(compare_double(divide(-25, 3), -8.3333333333));
+    EXPECT_TRUE(compare_double(divide(14879, -79466), -0.187237309));
+    EXPECT_TRUE(compare_double(divide(1, 5), 1.0/5.0));
+    EXPECT_TRUE(compare_double(divide(27, 23), 1.1739130435));
+}
+
+TEST(divide, doubles_whole_results)
+{
+    EXPECT_TRUE(compare_double(divide(125.0 ,5.0), 25.0));
+    EXPECT_TRUE(compare_double(divide(3.1415926536, 3.1415926536), 1));
+    EXPECT_TRUE(compare_double(divide(49.0/6.0, 7.0/42.0), 49.0));
+    EXPECT_TRUE(compare_double(divide(2171.0574 ,31.4646), 69.0));
+    EXPECT_TRUE(compare_double(divide(6.9006, 0.1643), 42.0));
+    EXPECT_TRUE(compare_double(divide(84.266711, 2.718281), 31.0));
+}
+
+TEST(divide, doubles_not_whole_results)
+{
+    EXPECT_TRUE(compare_double(divide(12.646, 1.465), 8.6320819113));
+    EXPECT_TRUE(compare_double(divide(-1.21, -1.1), -1.1));
+    EXPECT_TRUE(compare_double(divide(20.48, -6.4), -3.2));
+    EXPECT_TRUE(compare_double(divide(115.311, 61.1316), 18862748562));
+    EXPECT_TRUE(compare_double(divide(5362.00709808, 1.2345), 4343.46464));
+}
+
+TEST(divide, spicy_values)
+{
+    EXPECT_ANY_THROW(divide(234424, 0));
+    EXPECT_ANY_THROW(divide(0, 0));
+    EXPECT_ANY_THROW(divide(DBL_MAX, 0.1));
+    EXPECT_ANY_THROW(divide(2, DBL_MIN));
+    EXPECT_ANY_THROW(divide(1.0001, DBL_MIN));
+    EXPECT_ANY_THROW(divide(DBL_MIN, DBL_MAX));
+    EXPECT_ANY_THROW(divide(DBL_MIN, 2));
+}
+
+TEST(nth_power, integer_base)
+{
+    EXPECT_TRUE(compare_double(nth_power(4, 2), 16));
+    EXPECT_TRUE(compare_double(nth_power(-1, 2), 1));
+    EXPECT_TRUE(compare_double(nth_power(5, 2), 25));
+    EXPECT_TRUE(compare_double(nth_power(-3, 9), -19683));
+    EXPECT_TRUE(compare_double(nth_power(1, 63635777747458878686868688648), 1));
+    EXPECT_TRUE(compare_double(nth_power(0, 366465473477673737567), 0));
+}
+
+TEST(nth_power, double_base)
+{
+    EXPECT_TRUE(compare_double(nth_power(0.5, 8), 0.00390625));
+    EXPECT_TRUE(compare_double(nth_power(0.01, 25), 0));
+    EXPECT_TRUE(compare_double(nth_power(-0.42, 2), 0.1764));
+    EXPECT_TRUE(compare_double(nth_power(1.12, 3), 1.404928));
+    EXPECT_TRUE(compare_double(nth_power(1.28, 5), 3.4359738368));
+    EXPECT_TRUE(compare_double(nth_power(5853583336626626, 0), 1));
+}
+
+TEST(nth_power, spicy_values)
+{
+    EXPECT_ANY_THROW(nth_power(3545, -1));
+    EXPECT_ANY_THROW(nth_power(55353, 3.14));
+    EXPECT_ANY_THROW(nth_power(2, DBL_MAX));
+
+    EXPECT_TRUE(compare_double(nth_power(2, 1.0), 2));
+}

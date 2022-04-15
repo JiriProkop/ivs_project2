@@ -56,7 +56,7 @@ double plus(double a, double b){
  * @param b divisor.
  * @return Returns the value of expression a / b.
  */
-double div(double a, double b){
+double divide(double a, double b){
     return a / b;
 }
 
@@ -65,7 +65,7 @@ double div(double a, double b){
  * a^b
  *
  * @param a base number.
- * @param b exponent.
+ * @param b natural exponent.
  * @return Returns the value of expression a^b.
  */
 double nth_power(double a, double b){
