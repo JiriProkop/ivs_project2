@@ -2,7 +2,6 @@
 #define _CALC_FUNCS_H
 
 #include <cmath>
-#include <float.h>
 
 #define ACCURACY 0.000001
 
