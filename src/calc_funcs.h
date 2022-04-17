@@ -57,6 +57,9 @@ double plus(double a, double b){
  * @return Returns the value of expression a / b.
  */
 double divide(double a, double b){
+    if (b == 0){
+        throw std::invalid_argument("cannot divide by 0");
+    }
     return a / b;
 }
 
