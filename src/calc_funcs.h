@@ -128,7 +128,7 @@ double mul(double a, double b)
  */
 unsigned long fac_value(unsigned long m)
 {
-    if(m == 1)
+    if(m == 0)
     {
         return 1;
     }
