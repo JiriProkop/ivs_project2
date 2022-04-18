@@ -64,8 +64,18 @@ double divide(double a, double b){
  * @param b natural exponent.
  * @return Returns the value of expression a^b.
  */
-double nth_power(double a, double b){
-    return pow(a, b);
+double nth_power(double a, long b){
+    double result = a;
+    if(b < 0){
+        throw std::invalid_argument("invalid exponent");
+    }
+    if(b == 0){
+        return 1;
+    }
+    //for(int i = 1; i < b; i++){
+    //    result = result * a;
+    //}
+    return pow(a,b);
 }
 
 /**
