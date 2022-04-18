@@ -75,9 +75,13 @@ double nth_power(double a, double b){
  * @param n The exponent.
  * @return Returns the nth root of x.
  */
-double nth_root(double x, long n)
+double nth_root(double x, double n)
 {
-    if((n % 2 == 0 && x < 0) || n == 0)
+    if(!(compare_double(n, round(n))))
+    {
+        throw std::invalid_argument("The root has to be a natural number!");
+    }
+    if(((long long)round(n) % 2 == 0 && x < 0) || n == 0)
     {
         throw std::invalid_argument("Invalid root!");
     }

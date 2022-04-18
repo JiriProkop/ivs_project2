@@ -36,8 +36,8 @@ TEST(nth_root, positive_even_roots){
     EXPECT_TRUE(compare_double(nth_root(256, 2), 16));
     EXPECT_TRUE(compare_double(nth_root(117649, 6), 7));
     EXPECT_TRUE(compare_double(nth_root(1048576, 20), 2));
-    EXPECT_TRUE(nth_root(compare_double(1.0/5.0, 2), 0.44721359));
-    EXPECT_TRUE(nth_root(compare_double(1.0/3.0, 16), 0.93364101));
+    EXPECT_TRUE(compare_double(nth_root(1.0/5.0, 2), 0.44721359));
+    EXPECT_TRUE(compare_double(nth_root(1.0/3.0, 16), 0.93364101));
     EXPECT_ANY_THROW(nth_root(-2,2));
     EXPECT_ANY_THROW(nth_root(-8,4));
     EXPECT_ANY_THROW(nth_root(-1.0/3.0,2));
@@ -46,11 +46,11 @@ TEST(nth_root, positive_even_roots){
     EXPECT_TRUE(compare_double(nth_root(2698, 6), 3.73112951));
 }
 TEST(nth_root, negative_even_roots){
-    EXPECT_TRUE(nth_root(compare_double(4, -2), 1/2));
-    EXPECT_TRUE(nth_root(compare_double(117649, -6), 1/7));
-    EXPECT_TRUE(nth_root(compare_double(1048576, -20), 1/2));
-    EXPECT_TRUE(nth_root(compare_double(1.0/5.0, -2), 2.23606797));
-    EXPECT_TRUE(nth_root(compare_double(1.0/3.0, -16), 1.07107548));
+    EXPECT_TRUE(compare_double(nth_root(4, -2), 1.0/2.0));
+    EXPECT_TRUE(compare_double(nth_root(117649, -6), 1.0/7.0));
+    EXPECT_TRUE(compare_double(nth_root(1048576, -20), 1.0/2.0));
+    EXPECT_TRUE(compare_double(nth_root(1.0/5.0, -2), 2.23606797));
+    EXPECT_TRUE(compare_double(nth_root(1.0/3.0, -16), 1.07107548));
     EXPECT_ANY_THROW(nth_root(-2,-2));
     EXPECT_ANY_THROW(nth_root(-8,-4));
     EXPECT_ANY_THROW(nth_root(-1.0/3.0,-2));
@@ -66,7 +66,7 @@ TEST(nth_root, positive_odd_roots){
     EXPECT_TRUE(compare_double(nth_root(12, 7), 1.42616163));
     EXPECT_TRUE(compare_double(nth_root(-12, 7), -1.42616163));
     EXPECT_TRUE(compare_double(nth_root(29.0/19.0, 7), 1.06226999));
-    EXPECT_TRUE(compare_double(nth_root(-1.0/3.0, 11), 0.90495157));
+    EXPECT_TRUE(compare_double(nth_root(-1.0/3.0, 11), -0.90495157));
 }
 
 TEST(nth_root, neagtive_odd_roots){
