@@ -1,3 +1,9 @@
+/**
+ * @file profiling.cpp
+ * @author Patrik Čerbák (xcerba00)
+ * @brief  standard deviation to check the result of profiling
+ */
+
 #include <iostream>
 #include <string>
 #include "calc_funcs.h"
@@ -32,3 +38,4 @@ int main() {
 	return 0;
 }
 
+/*** end of file profiling.cpp ***/
