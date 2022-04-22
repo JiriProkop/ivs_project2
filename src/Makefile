@@ -19,7 +19,9 @@ pack:
 clean:
 	rm -f $(EXEC1)
 	rm -f $(EXEC2)
-	#TODO clean build folders
+	rm -rf ./build/
+	rm -rf ./qt/Calc/build/
+	#TODO clean generated documentation
 
 test:
 	if [ ! -d "./build/" ]; then \
