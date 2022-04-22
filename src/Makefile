@@ -3,6 +3,7 @@
 # 	g++			   	sudo apt install g++
 # 	zip			   	sudo apt install zip
 # 	git				sudo apt install git
+#	doxygen			sudo apt install doxygen
 
 EXEC1 = calc
 EXEC2 = profiling
@@ -22,22 +23,24 @@ clean:
 	rm -f $(EXEC2)
 	rm -rf ./build/
 	rm -rf ./qt/Calc/build/
-	#TODO clean generated documentation
+	rm -rf ../doc/
 
 gtest:
-	if [ ! -d "./googletest/" ]; then \
+	if ! [ -d "./googletest/" ]; then \
 	git clone https://github.com/google/googletest.git; fi
 
 test:
 	make gtest
-	if [ ! -d "./build/" ]; then \
+	if ! [ -d "./build/" ]; then \
 	mkdir build; fi
 	cd build; cmake ..; make; ./calc_tests
 doc:
+	if ! [ -d "../doc/" ]; then \
+	mkdir ../doc; fi
 	#TODO generate documentation
 
 run:
-	if [ ! -d "./qt/build/" ]; then \
+	if ! [ -d "./qt/build/" ]; then \
 	mkdir ./qt/Calc/build; fi
 	cd qt/Calc/build; cmake ..; make; ./Calc
 
