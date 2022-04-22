@@ -2,6 +2,7 @@
 #	qt5-default		https://wiki.qt.io/Install_Qt_5_on_Ubuntu
 # 	g++			   	sudo apt install g++
 # 	zip			   	sudo apt install zip
+# 	git				sudo apt install git
 
 EXEC1 = calc
 EXEC2 = profiling
@@ -23,7 +24,12 @@ clean:
 	rm -rf ./qt/Calc/build/
 	#TODO clean generated documentation
 
+gtest:
+	if [ ! -d "./googletest/" ]; then \
+	git clone https://github.com/google/googletest.git; fi
+
 test:
+	make gtest
 	if [ ! -d "./build/" ]; then \
 	mkdir build; fi
 	cd build; cmake ..; make; ./calc_tests
