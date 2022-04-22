@@ -91,7 +91,7 @@ double nth_root(double x, double n)
     {
         throw std::invalid_argument("The root has to be a natural number!");
     }
-    if(((long long)round(n) % 2 == 0 && x < 0) || n == 0)
+    if(((long long)round(n) % 2 == 0 && x < 0) || n == 0 || n < 0)
     {
         throw std::invalid_argument("Invalid root!");
     }
