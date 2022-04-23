@@ -29,9 +29,9 @@ int main() {
     fraction =  divide(1, fraction);
 
     double result = mul(fraction, bracket);
-    result = nth_root(result, 2);
 
     printf("%lf\n", result);
+
 	return 0;
 }
 
