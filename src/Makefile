@@ -45,4 +45,4 @@ run:
 	cd qt/Calc/build; cmake ..; make; ./Calc
 
 profile: calc_funcs.h
-	$(CXX) $(CXXFLAGS) $(EXEC2).cpp -g -pg -o $(EXEC2)
+	$(CXX) $(CXXFLAGS) $(EXEC2).cpp -o $(EXEC2)
