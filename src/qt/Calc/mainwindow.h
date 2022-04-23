@@ -17,6 +17,7 @@ public:
 
 public slots:
     void putNumber(const QString &number);
+    void putDot();
 
 private:
     Ui::MainWindow *ui;
