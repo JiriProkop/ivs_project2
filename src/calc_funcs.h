@@ -1,3 +1,9 @@
+/**
+ * @file calc_funcs.h
+ * @author Jiří Prokop (xproko47), Patrik Čerbák (xcerba00), Štěpán Czajkowski (xczajk01)
+ * @brief  matematická knihovna 
+ */
+
 #ifndef _CALC_FUNCS_H
 #define _CALC_FUNCS_H
 
@@ -14,6 +20,26 @@
  */
 bool compare_double(double a, double b) {
     return fabs(a - b) < ACCURACY;
+}
+
+/**
+ * A function for remainder after division.
+ * a % b
+ *
+ * @param a dividend
+ * @param b divisor
+ * @return Returns the value of expression a*b.
+ */
+
+long modulo(double a, double b){
+    if(b == 0){
+        throw std::invalid_argument("divisor cannot be 0");
+    }
+    if(!(compare_double(a, round(a))) || !(compare_double(b, round(b))))
+    {
+        throw std::invalid_argument("only natural numbers");
+    }
+    return (long)a % (long)b;
 }
 
 /**
@@ -63,18 +89,28 @@ double divide(double a, double b){
  * @param b natural exponent.
  * @return Returns the value of expression a^b.
  */
-double nth_power(double a, long b){
-    double result = a;
+double nth_power(double a, double b){
+    long double result = a;
+    if(!(compare_double(b, round(b))))
+    {
+        throw std::invalid_argument("exponent has to be a natural number");
+    }
     if(b < 0){
-        throw std::invalid_argument("invalid exponent");
+        throw std::invalid_argument("exponent has to be a natural number");
     }
     if(b == 0){
         return 1;
     }
-    //for(int i = 1; i < b; i++){
-    //    result = result * a;
-    //}
-    return pow(a,b);
+    for(int i = 1; i < (int)b; i++){
+       result = result * 100000000.0;
+       std::round(result);
+       result = result / 100000000.0;
+       result = result * a;
+       if(result > 99999999999999999999.0  || result < -99999999999999999999.0){
+           throw std::invalid_argument("result too big");
+       }
+    }
+    return result;
 }
 
 /**
@@ -163,3 +199,5 @@ double fac(double n)
 
 
 #endif
+
+/*** end of file calc_funcs.h ***/
