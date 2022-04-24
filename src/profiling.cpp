@@ -21,11 +21,14 @@ int main() {
     }
 
     double average = divide(sum, num_of_lines);
-    double bracket = sub(sum_squared, mul(num_of_lines, nth_power(average, 2)));
+    double bracket = nth_power(average, 2);
+    bracket = mul(num_of_lines, bracket);
+    bracket = sub(sum_squared, bracket);
 
-    double fraction = divide(1, sub(num_of_lines, 1));
+    double fraction = sub(num_of_lines, 1);
+    fraction =  divide(1, fraction);
 
-    double result = nth_root(mul(fraction, bracket), 2);
+    double result = mul(fraction, bracket);
 
     printf("%lf\n", result);
 
