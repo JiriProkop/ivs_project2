@@ -32,12 +32,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->modulo, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("mod"); });
     connect(ui->nthPower, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("^"); });
     connect(ui->nthRoot, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("√"); });
+    connect(ui->factorial, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("!"); });
 
 
     connect(ui->equals, &QPushButton::clicked ,this, &MainWindow::evaluateSolution);
 
 
-    QRegularExpression rx("[0-9]{1,20}(\\.[0-9]{1,8})|()");
+    QRegularExpression rx("-?[0-9]{1,20}(\\.[0-9]{1,8})|()");
     QValidator *validator = new QRegularExpressionValidator(rx, this);
     ui->inputField->setValidator(validator);
 
@@ -60,7 +61,11 @@ void MainWindow::putDot()
 
 void MainWindow::putPrevNum(const QString &operation)
 {
-    if(!alreadyOperation)
+    if(QString::compare(ui->inputField->text(), "") == 0 && QString::compare(operation, "-") == 0)
+    {
+        ui->inputField->insert("-");
+    }
+    else if(!alreadyOperation)
     {
         ui->prevNum->setText(ui->inputField->text() + " " + operation);
         ui->inputField->clear();
@@ -70,14 +75,70 @@ void MainWindow::putPrevNum(const QString &operation)
 
 void MainWindow::evaluateSolution()
 {
-    if(QString::compare(ui->prevNum->text(), "") == 0 || QString::compare(ui->inputField->text(), "") == 0)
+    if(QString::compare(ui->prevNum->text(), "") == 0 || QString::compare(ui->prevNum->text(), "- -") == 0
+       || QString::compare(ui->inputField->text(), "") == 0 || QString::compare(ui->inputField->text(), "-") == 0)
     {
-        ui->prevNum->setText("Error: not enough numbers!"); // TODO
-        return;
+        if(!(QString::compare(ui->prevNum->text(), "") != 0 && QString::compare(ui->prevNum->text().split(" ")[1], "!") == 0
+             && QString::compare(ui->inputField->text(), "") == 0))
+        {
+            ui->prevNum->setText("Error: not enough numbers!"); // TODO
+            alreadyOperation = 0;
+            return;
+        }
     }
     double a = ui->prevNum->text().split(" ")[0].toDouble();
     double b = ui->inputField->text().toDouble();
 
+    if(QString::compare(ui->prevNum->text().split(" ")[1], "+") == 0)
+    {
+        ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
+        ui->inputField->setText(QString().setNum(plus(a, b), 'f', 8));
+    }
+    else if(QString::compare(ui->prevNum->text().split(" ")[1], "-") == 0)
+    {
+        ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
+        ui->inputField->setText(QString().setNum(sub(a, b), 'f', 8));
+    }
+    else if(QString::compare(ui->prevNum->text().split(" ")[1], "X") == 0)
+    {
+        ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
+        ui->inputField->setText(QString().setNum(mul(a, b), 'f', 8));
+    }
+    else if(QString::compare(ui->prevNum->text().split(" ")[1], "/") == 0)
+    {
+        ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
+        ui->inputField->setText(QString().setNum(divide(a, b), 'f', 8));
+    }
+    else if(QString::compare(ui->prevNum->text().split(" ")[1], "mod") == 0)
+    {
+        ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
+        ui->inputField->setText(QString().setNum(modulo(a, b), 'f', 8));
+    }
+    else if(QString::compare(ui->prevNum->text().split(" ")[1], "^") == 0)
+    {
+        ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
+        ui->inputField->setText(QString().setNum(nth_power(a, b), 'f', 8));
+    }
+    else if(QString::compare(ui->prevNum->text().split(" ")[1], "^") == 0)
+    {
+        ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
+        ui->inputField->setText(QString().setNum(nth_power(a, b), 'f', 8));
+    }
+    else if(QString::compare(ui->prevNum->text().split(" ")[1], "√") == 0)
+    {
+        ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
+        ui->inputField->setText(QString().setNum(nth_root(b, a), 'f', 8));
+    }
+    else if(QString::compare(ui->prevNum->text().split(" ")[1], "!") == 0)
+    {
+        ui->prevNum->setText(ui->prevNum->text() + " =");
+        ui->inputField->setText(QString().setNum(fac(a), 'f', 8));
+    }
 
     alreadyOperation = 0;
 }
+
+// TODO: when doing only operations with integers, output integer, not double
+//       check whether the number is too big.
+//       catch throws
+//       the equation does not fit the label sometimes

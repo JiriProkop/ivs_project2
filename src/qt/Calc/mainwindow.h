@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QRegularExpressionValidator>
-//#include "../../calc_funcs.h"
+#include "../../calc_funcs.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

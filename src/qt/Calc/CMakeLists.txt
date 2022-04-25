@@ -44,7 +44,12 @@ else()
     endif()
 endif()
 
+add_library(calc_functions
+    ../../calc_funcs.cpp
+)
+
 target_link_libraries(Calc PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Calc PRIVATE calc_functions)
 
 set_target_properties(Calc PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
