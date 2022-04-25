@@ -197,7 +197,4 @@ double fac(double n)
     return fac_value(m);
 }
 
-
 #endif
-
-/*** end of file calc_funcs.h ***/
