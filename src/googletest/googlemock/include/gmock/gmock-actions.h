@@ -915,9 +915,8 @@ class ReturnAction {
     // and put the typedef both here (for use in assert statement) and
     // in the Impl class. But both definitions must be the same.
     typedef typename Function<F>::Result Result;
-    GTEST_COMPILE_ASSERT_(
-        !std::is_reference<Result>::value,
-        use_ReturnRef_instead_of_Return_to_return_a_reference);
+    static_assert(!std::is_reference<Result>::value,
+                  "use ReturnRef instead of Return to return a reference");
     static_assert(!std::is_void<Result>::value,
                   "Can't use Return() on an action expected to return `void`.");
     return Action<F>(new Impl<R, F>(value_));
@@ -945,8 +944,8 @@ class ReturnAction {
     Result Perform(const ArgumentTuple&) override { return value_; }
 
    private:
-    GTEST_COMPILE_ASSERT_(!std::is_reference<Result>::value,
-                          Result_cannot_be_a_reference_type);
+    static_assert(!std::is_reference<Result>::value,
+                  "Result cannot be a reference type");
     // We save the value before casting just in case it is being cast to a
     // wrapper type.
     R value_before_cast_;
@@ -1020,8 +1019,8 @@ class ReturnRefAction {
     // Asserts that the function return type is a reference.  This
     // catches the user error of using ReturnRef(x) when Return(x)
     // should be used, and generates some helpful error message.
-    GTEST_COMPILE_ASSERT_(std::is_reference<Result>::value,
-                          use_Return_instead_of_ReturnRef_to_return_a_value);
+    static_assert(std::is_reference<Result>::value,
+                  "use Return instead of ReturnRef to return a value");
     return Action<F>(new Impl<F>(ref_));
   }
 
@@ -1062,9 +1061,8 @@ class ReturnRefOfCopyAction {
     // Asserts that the function return type is a reference.  This
     // catches the user error of using ReturnRefOfCopy(x) when Return(x)
     // should be used, and generates some helpful error message.
-    GTEST_COMPILE_ASSERT_(
-        std::is_reference<Result>::value,
-        use_Return_instead_of_ReturnRefOfCopy_to_return_a_value);
+    static_assert(std::is_reference<Result>::value,
+                  "use Return instead of ReturnRefOfCopy to return a value");
     return Action<F>(new Impl<F>(value_));
   }
 
@@ -1295,6 +1293,51 @@ struct WithArgsAction {
 template <typename... Actions>
 struct DoAllAction {
  private:
+  // The type of reference that should be provided to an initial action for a
+  // mocked function parameter of type T.
+  //
+  // There are two quirks here:
+  //
+  //  *  Unlike most forwarding functions, we pass scalars through by value.
+  //     This isn't strictly necessary because an lvalue reference would work
+  //     fine too and be consistent with other non-reference types, but it's
+  //     perhaps less surprising.
+  //
+  //     For example if the mocked function has signature void(int), then it
+  //     might seem surprising for the user's initial action to need to be
+  //     convertible to Action<void(const int&)>. This is perhaps less
+  //     surprising for a non-scalar type where there may be a performance
+  //     impact, or it might even be impossible, to pass by value.
+  //
+  //  *  More surprisingly, `const T&` is often not a const reference type.
+  //     By the reference collapsing rules in C++17 [dcl.ref]/6, if T refers to
+  //     U& or U&& for some non-scalar type U, then NonFinalType<T> is U&. In
+  //     other words, we may hand over a non-const reference.
+  //
+  //     So for example, given some non-scalar type Obj we have the following
+  //     mappings:
+  //
+  //            T               NonFinalType<T>
+  //         -------            ---------------
+  //         Obj                const Obj&
+  //         Obj&               Obj&
+  //         Obj&&              Obj&
+  //         const Obj          const Obj&
+  //         const Obj&         const Obj&
+  //         const Obj&&        const Obj&
+  //
+  //     In other words, the initial actions get a mutable view of an non-scalar
+  //     argument if and only if the mock function itself accepts a non-const
+  //     reference type. They are never given an rvalue reference to an
+  //     non-scalar type.
+  //
+  //     This situation makes sense if you imagine use with a matcher that is
+  //     designed to write through a reference. For example, if the caller wants
+  //     to fill in a reference argument and then return a canned value:
+  //
+  //         EXPECT_CALL(mock, Call)
+  //             .WillOnce(DoAll(SetArgReferee<0>(17), Return(19)));
+  //
   template <typename T>
   using NonFinalType =
       typename std::conditional<std::is_scalar<T>::value, T, const T&>::type;

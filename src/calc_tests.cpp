@@ -1,3 +1,8 @@
+/**
+ * @file calc_test.cpp
+ * @author Jiří Prokop (xproko47), Patrik Čerbák (xcerba00), Štěpán Czajkowski (xczajk01)
+ * @brief  tests for calc_funcs.h
+ */
 #include <gtest/gtest.h>
 #include "calc_funcs.h"
 
@@ -61,6 +66,21 @@ TEST(nth_root, invalid_root){
     EXPECT_ANY_THROW(nth_root(2,-1));
     EXPECT_ANY_THROW(nth_root(2,-2));
     EXPECT_ANY_THROW(nth_root(2,1.0/2.0));
+}
+
+TEST(modulo, valid_values) {
+    EXPECT_TRUE(compare_double(modulo(4, 1), 0));
+    EXPECT_TRUE(compare_double(modulo(-4, 1), 0));
+    EXPECT_TRUE(compare_double(modulo(15, 6), 3));
+    EXPECT_TRUE(compare_double(modulo(15, -6), 3));
+    EXPECT_TRUE(compare_double(modulo(-15, 6), -3));
+}
+
+TEST(modulo, invalid_root){
+    EXPECT_ANY_THROW(modulo(2,0));
+    EXPECT_ANY_THROW(modulo(1.6,1.78));
+    EXPECT_ANY_THROW(modulo(78.9,54));
+    EXPECT_ANY_THROW(modulo(65,34.7));
 }
  
 TEST(plus, integers)
@@ -189,3 +209,4 @@ TEST(fac, factorial)
     EXPECT_EQ(fac(20), 2.432902008176640000e+18);
     EXPECT_ANY_THROW(fac(30));
 }
+/*** end of file calc_tests.cpp ***/
