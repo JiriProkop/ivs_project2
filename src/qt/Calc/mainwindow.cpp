@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
 
         connect(ui->del, &QPushButton::clicked ,this, [this] {ui->lineEdit->backspace(); });
         connect(ui->ac, &QPushButton::clicked ,this, [this] {ui->lineEdit->clear(); });
+
+        connect(ui->equals, &QPushButton::clicked ,this, [this] {ui->prevNum->setText(ui->lineEdit->text()); });
+
 }
 
 MainWindow::~MainWindow()
