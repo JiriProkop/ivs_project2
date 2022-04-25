@@ -8,6 +8,7 @@
 #define _CALC_FUNCS_H
 
 #include <cmath>
+#include <stdexcept>
 
 #define ACCURACY 0.000001
 
