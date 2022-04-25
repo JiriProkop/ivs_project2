@@ -1,9 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
-int decimals = 0;
-int numOfCharacters = 0;
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -25,10 +22,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->dot, &QPushButton::clicked ,this, &MainWindow::putDot);
 
     connect(ui->del, &QPushButton::clicked ,this, [this] {ui->inputField->backspace(); });
-    connect(ui->ac, &QPushButton::clicked ,this, [this] {ui->inputField->clear(); });
+    connect(ui->ac, &QPushButton::clicked ,this, [this] {ui->inputField->clear(); ui->prevNum->clear(); });
 
     connect(ui->equals, &QPushButton::clicked ,this, [this] {ui->prevNum->setText(ui->inputField->text()); });
 
+
+    QRegularExpression rx("[0-9]{1,20}(\\.[0-9]{1,8})|()");
+    QValidator *validator = new QRegularExpressionValidator(rx, this);
+    ui->inputField->setValidator(validator);
 
 }
 
@@ -39,25 +40,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::putNumber(const QString &number)
 {
-    if(decimals == 0 && numOfCharacters < 20)
-    {
-        ui->inputField->insert(number);
-        numOfCharacters++;
-    }
-    else if(decimals == 1 && numOfCharacters < 28)
-    {
-        ui->inputField->insert(number);
-        numOfCharacters++;
-    }
-
+    ui->inputField->insert(number);
 }
+
 
 
 void MainWindow::putDot()
 {
-    if(decimals == 0)
-    {
-        ui->inputField->insert(".");
-        decimals = 1;
-    }
+    ui->inputField->insert(".");
 }
+
