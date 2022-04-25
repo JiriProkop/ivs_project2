@@ -161,5 +161,4 @@ double fac(double n)
     return fac_value(m);
 }
 
-
 #endif

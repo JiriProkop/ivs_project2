@@ -258,7 +258,7 @@
      <string>!</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="zero_4">
+   <widget class="QPushButton" name="modulo">
     <property name="geometry">
      <rect>
       <x>130</x>
