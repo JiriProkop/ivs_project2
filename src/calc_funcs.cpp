@@ -3,14 +3,17 @@
  * @author Jiří Prokop (xproko47), Patrik Čerbák (xcerba00), Štěpán Czajkowski (xczajk01)
  * @brief  matematická knihovna
  */
+
+#include "calc_funcs.h"
 #include <cmath>
+#include <stdexcept>
 
 bool compare_double(double a, double b)
 {
     return fabs(a - b) < ACCURACY;
 }
 
-long modulo(double a, double b)
+double modulo(double a, double b)
 {
     if(b == 0){
         throw std::invalid_argument("divisor cannot be 0");
@@ -19,7 +22,7 @@ long modulo(double a, double b)
     {
         throw std::invalid_argument("only natural numbers");
     }
-    return (long)a % (long)b;
+    return (double)((long)a % (long)b);
 }
 
 double sub(double a, double b)
@@ -119,5 +122,3 @@ double fac(double n)
 
     return fac_value(m);
 }
-
-#endif

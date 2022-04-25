@@ -8,6 +8,7 @@
 #define _CALC_FUNCS_H
 
 #include <cmath>
+#include <stdexcept>
 
 #define ACCURACY 0.000001
 
@@ -28,7 +29,7 @@ bool compare_double(double a, double b);
  * @param b divisor
  * @return Returns the value of expression a*b.
  */
-long modulo(double a, double b);
+double modulo(double a, double b);
 
 /**
  * A function for calculating the subtraction of two numbers.
@@ -78,7 +79,6 @@ double nth_power(double a, double b);
  * @return Returns the nth root of x.
  */
 double nth_root(double x, double n);
-}
 
 /**
  * A function for multiplying two numbers.
