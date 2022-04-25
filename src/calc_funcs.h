@@ -18,9 +18,7 @@
  * @param b Second value.
  * @return Returns true if the numbers are equal.
  */
-bool compare_double(double a, double b) {
-    return fabs(a - b) < ACCURACY;
-}
+bool compare_double(double a, double b);
 
 /**
  * A function for remainder after division.
@@ -30,17 +28,7 @@ bool compare_double(double a, double b) {
  * @param b divisor
  * @return Returns the value of expression a*b.
  */
-
-long modulo(double a, double b){
-    if(b == 0){
-        throw std::invalid_argument("divisor cannot be 0");
-    }
-    if(!(compare_double(a, round(a))) || !(compare_double(b, round(b))))
-    {
-        throw std::invalid_argument("only natural numbers");
-    }
-    return (long)a % (long)b;
-}
+long modulo(double a, double b);
 
 /**
  * A function for calculating the subtraction of two numbers.
@@ -50,9 +38,7 @@ long modulo(double a, double b){
  * @param b Second number.
  * @return Returns the value of expression a - b.
  */
-double sub(double a, double b) {
-    return a - b;
-}
+double sub(double a, double b);
 
 /**
  * A function for adding two numbers.
@@ -62,10 +48,7 @@ double sub(double a, double b) {
  * @param b Second number.
  * @return Returns the value of expression a + b.
  */
-double plus(double a, double b){
-    return a + b;
-}
-
+double plus(double a, double b);
 /**
  * A function for division of two numbers.
  * a / b
@@ -74,12 +57,7 @@ double plus(double a, double b){
  * @param b divisor.
  * @return Returns the value of expression a / b.
  */
-double divide(double a, double b){
-    if (b == 0){
-        throw std::invalid_argument("cannot divide by 0");
-    }
-    return a / b;
-}
+double divide(double a, double b);
 
 /**
  * A function for calculating the nth_power of number .
@@ -89,29 +67,7 @@ double divide(double a, double b){
  * @param b natural exponent.
  * @return Returns the value of expression a^b.
  */
-double nth_power(double a, double b){
-    long double result = a;
-    if(!(compare_double(b, round(b))))
-    {
-        throw std::invalid_argument("exponent has to be a natural number");
-    }
-    if(b < 0){
-        throw std::invalid_argument("exponent has to be a natural number");
-    }
-    if(b == 0){
-        return 1;
-    }
-    for(int i = 1; i < (int)b; i++){
-       result = result * 100000000.0;
-       std::round(result);
-       result = result / 100000000.0;
-       result = result * a;
-       if(result > 99999999999999999999.0  || result < -99999999999999999999.0){
-           throw std::invalid_argument("result too big");
-       }
-    }
-    return result;
-}
+double nth_power(double a, double b);
 
 /**
  * A function for calculating the nth root of a number.
@@ -121,25 +77,7 @@ double nth_power(double a, double b){
  * @param n The exponent.
  * @return Returns the nth root of x.
  */
-double nth_root(double x, double n)
-{
-    if(!(compare_double(n, round(n))))
-    {
-        throw std::invalid_argument("The root has to be a natural number!");
-    }
-    if(((long long)round(n) % 2 == 0 && x < 0) || n == 0 || n < 0)
-    {
-        throw std::invalid_argument("Invalid root!");
-    }
-
-    if(x < 0)
-    {
-        return - std::pow(fabs(x), 1.0/n);
-    }
-    else
-    {
-        return std::pow(x, 1.0/n);
-    }
+double nth_root(double x, double n);
 }
 
 /**
@@ -150,10 +88,7 @@ double nth_root(double x, double n)
  * @param b multiplied number
  * @return Returns the value of expression a*b.
  */
-double mul(double a, double b)
-{
-    return a * b;
-}
+double mul(double a, double b);
 
 /**
  * A function for calculating a factorial of a number.
@@ -162,14 +97,7 @@ double mul(double a, double b)
  * @param m factorial argument
  * @return Returns the value of expression m! .
  */
-unsigned long fac_value(unsigned long m)
-{
-    if(m == 0)
-    {
-        return 1;
-    }
-    return m * fac_value(m - 1);
-}
+unsigned long fac_value(unsigned long m);
 
 /**
  * A function for checking argument for calculating a factorial.
@@ -178,23 +106,6 @@ unsigned long fac_value(unsigned long m)
  * @param n factorial argument, must be a natural number lesser than 21
  * @return Returns the value of expression n!.
  */
-double fac(double n)
-{
-    if(n < 0)
-    {
-        throw std::invalid_argument("The number has to be positive or zero!");
-    }
-    if(!(compare_double(n, round(n))))
-    {
-        throw std::invalid_argument("The number has to be a natural number!");
-    }
-    if(n > 20)
-    {
-        throw std::invalid_argument("Math error: the result is too big!");
-    }
-    unsigned long m = round(n);
-
-    return fac_value(m);
-}
+double fac(double n);
 
 #endif
