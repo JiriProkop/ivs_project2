@@ -73,6 +73,18 @@ void MainWindow::putPrevNum(const QString &operation)
     }
 }
 
+int display_result(double result)
+{
+    if(is_int(result))
+    {
+        return 0;
+    }
+    else
+    {
+        return 8;
+    }
+}
+
 void MainWindow::evaluateSolution()
 {
     if(QString::compare(ui->prevNum->text(), "") == 0 || QString::compare(ui->prevNum->text(), "- -") == 0
@@ -88,53 +100,91 @@ void MainWindow::evaluateSolution()
     }
     double a = ui->prevNum->text().split(" ")[0].toDouble();
     double b = ui->inputField->text().toDouble();
+    double result = 0;
 
     if(QString::compare(ui->prevNum->text().split(" ")[1], "+") == 0)
     {
         ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
-        ui->inputField->setText(QString().setNum(plus(a, b), 'f', 8));
+        result = plus(a, b);
+        ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
     }
     else if(QString::compare(ui->prevNum->text().split(" ")[1], "-") == 0)
     {
         ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
-        ui->inputField->setText(QString().setNum(sub(a, b), 'f', 8));
+        result = sub(a, b);
+        ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
     }
     else if(QString::compare(ui->prevNum->text().split(" ")[1], "X") == 0)
     {
         ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
-        ui->inputField->setText(QString().setNum(mul(a, b), 'f', 8));
+        result = mul(a, b);
+        ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
     }
     else if(QString::compare(ui->prevNum->text().split(" ")[1], "/") == 0)
     {
         ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
-        ui->inputField->setText(QString().setNum(divide(a, b), 'f', 8));
+        try {
+            result = divide(a, b);
+            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+        }
+        catch (std::invalid_argument) {
+            ui->inputField->setText("Math error!");
+        }
     }
     else if(QString::compare(ui->prevNum->text().split(" ")[1], "mod") == 0)
     {
         ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
-        ui->inputField->setText(QString().setNum(modulo(a, b), 'f', 8));
+        try {
+            result = modulo(a, b);
+            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+        }
+        catch (std::invalid_argument) {
+            ui->inputField->setText("Math error!");
+        }
     }
     else if(QString::compare(ui->prevNum->text().split(" ")[1], "^") == 0)
     {
         ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
-        ui->inputField->setText(QString().setNum(nth_power(a, b), 'f', 8));
+        try {
+            result = nth_power(a, b);
+            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+        }
+        catch (std::invalid_argument) {
+            ui->inputField->setText("Math error!");
+        }
     }
     else if(QString::compare(ui->prevNum->text().split(" ")[1], "^") == 0)
     {
         ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
-        ui->inputField->setText(QString().setNum(nth_power(a, b), 'f', 8));
+        try {
+            result = nth_power(a, b);
+            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+        }
+        catch (std::invalid_argument) {
+            ui->inputField->setText("Math error!");
+        }
     }
     else if(QString::compare(ui->prevNum->text().split(" ")[1], "√") == 0)
     {
         ui->prevNum->setText(ui->prevNum->text() + " " + ui->inputField->text() + " =");
-        ui->inputField->setText(QString().setNum(nth_root(b, a), 'f', 8));
+        try {
+            result = nth_root(b, a);
+            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+        }
+        catch (std::invalid_argument) {
+            ui->inputField->setText("Math error!");
+        }
     }
     else if(QString::compare(ui->prevNum->text().split(" ")[1], "!") == 0)
     {
         ui->prevNum->setText(ui->prevNum->text() + " =");
-        ui->inputField->setText(QString().setNum(fac(a), 'f', 8));
+        try {
+            ui->inputField->setText(QString().setNum(fac(a), 'f', 0));
+        }
+        catch (std::invalid_argument x) {
+            ui->inputField->setText("Math error!");
+        }
     }
-
     alreadyOperation = 0;
 }
 
