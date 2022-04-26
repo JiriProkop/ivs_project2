@@ -27,7 +27,7 @@ int get_number_length(double a)
         }
         else if(str[i] == '-')
         {
-            j++;
+            j++; // the minus sign is not relevant to number length
         }
         i++;
     }

@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->help, &QPushButton::clicked ,this, [this] {system("xdg-open /home/patrik/Skola/IVS/2/ivs_project2/dokumentace.pdf"); }); // TODO
 
-    QRegularExpression rx("-?[0-9]{1,20}(\\.[0-9]{0,8}\\+?\\-?\\*?\\/?)|()");
+    QRegularExpression rx("-?[0-9]{1,20}((\\.[0-9]{0,8}[+,\\-,*,/,=]?)|([+,\\-,*,/,=]?))");
     QValidator *validator = new QRegularExpressionValidator(rx, this);
     ui->inputField->setValidator(validator);
 
@@ -63,7 +63,42 @@ void MainWindow::putDot()
 
 void MainWindow::checkForOperation()
 {
-    return;
+    QString str = ui->inputField->text();
+    int i = 0;
+    while(i < str.size())
+    {
+        if(str[i] == '+')
+        {
+            ui->inputField->backspace();
+            MainWindow::putPrevNum("+");
+            return;
+        }
+        else if(str[i] == '-')
+        {
+            ui->inputField->backspace();
+            MainWindow::putPrevNum("-");
+            return;
+        }
+        else if(str[i] == '*')
+        {
+            ui->inputField->backspace();
+            MainWindow::putPrevNum("*");
+            return;
+        }
+        else if(str[i] == '/')
+        {
+            ui->inputField->backspace();
+            MainWindow::putPrevNum("/");
+            return;
+        }
+        else if(str[i] == '=')
+        {
+            ui->inputField->backspace();
+            MainWindow::evaluateSolution();
+            return;
+        }
+        i++;
+    }
 }
 
 void MainWindow::putPrevNum(const QString &operation)
@@ -252,8 +287,3 @@ void MainWindow::evaluateSolution()
     }
     alreadyOperation = 0;
 }
-
-// TODO:
-//
-//       keyboard control
-//
