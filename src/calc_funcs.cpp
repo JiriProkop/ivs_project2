@@ -7,10 +7,31 @@
 #include "calc_funcs.h"
 #include <cmath>
 #include <stdexcept>
+#include <string>
 
 bool compare_double(double a, double b)
 {
     return fabs(a - b) < ACCURACY;
+}
+
+int get_number_length(double a)
+{
+    std::string str = std::to_string(a);
+    int i = 0;
+    int j = 0;
+    while(str[i] != '\0')
+    {
+        if(str[i] == '.')
+        {
+            return i - j;
+        }
+        else if(str[i] == '-')
+        {
+            j++;
+        }
+        i++;
+    }
+    return i - j;
 }
 
 bool is_int(double a)

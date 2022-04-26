@@ -9,6 +9,7 @@
 
 #include <cmath>
 #include <stdexcept>
+#include <string>
 
 #define ACCURACY 0.000001
 
@@ -20,6 +21,14 @@
  * @return Returns true if the numbers are equal.
  */
 bool compare_double(double a, double b);
+
+/**
+ * A function for getting the length of the number before the decimal separator.
+ *
+ * @param a The number to check.
+ * @return Returns the number of integers.
+ */
+int get_number_length(double a);
 
 /**
  * A function for telling whether double is an integer or not.
