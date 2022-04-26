@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QRegularExpressionValidator>
-//#include "../../calc_funcs.h"
+#include "../../calc_funcs.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,6 +20,7 @@ public:
 public slots:
     void putNumber(const QString &number);
     void putDot();
+    void checkForOperation();
     void putPrevNum(const QString &operation);
     void evaluateSolution();
 
