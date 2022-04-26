@@ -10,6 +10,7 @@ CXX = g++
 CXXFLAGS = -Wall -g -Wextra
 DEPS = $(wildcard *.h)
 DEPS := $(DEPS) $(patsubst %.h,%.cpp,$(DEPS))
+PACK_NAME = xproko47_xcerba00_xczajk01
 
 .PHONY: doc
 
@@ -21,15 +22,15 @@ all:
 
 pack:
 	make clean
-	mkdir ../../xcerba00_xproko47_xczajk01
-	mkdir ../../xcerba00_xproko47_xczajk01/repo
-	cd ..; cp -r * ../xcerba00_xproko47_xczajk01/repo/
+	mkdir ../../$(PACK_NAME)
+	mkdir ../../$(PACK_NAME)/repo
+	cd ..; cp -r * ../$(PACK_NAME)/repo/
 	git log --pretty=format:"%h - %an, %ar : %s" --all > history.txt
-	mv history.txt ../../xcerba00_xproko47_xczajk01/repo
+	mv history.txt ../../$(PACK_NAME)/repo
 	make doc
-	cd ..; mv doc/ ../xcerba00_xproko47_xczajk01
-	mkdir ../../xcerba00_xproko47_xczajk01/installer
-	cd ../..; zip -rm xproko47_xcerba00_xczajk01 xcerba00_xproko47_xczajk01
+	cd ..; mv doc/ ../$(PACK_NAME)
+	mkdir ../../$(PACK_NAME)/installer
+	cd ../..; zip -rm $(PACK_NAME) $(PACK_NAME)
 	#TODO installer
 
 clean:
