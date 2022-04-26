@@ -42,18 +42,15 @@ gtest:
 
 test:
 	make gtest
-	if ! [ -d "./build/" ]; then \
-	mkdir build; fi
+	mkdir -p build
 	cd build; cmake ..; make; ./calc_tests
 doc:
-	if ! [ -d "../doc/" ]; then \
-	mkdir ../doc; fi
+	mkdir -p ../doc
 	cd ../doc
 	doxygen ../src/Doxyfile
 
 run:
-	if ! [ -d "./qt/build/" ]; then \
-	mkdir ./qt/Calc/build; fi
+	mkdir -p ./qt/Calc/build
 	cd qt/Calc/build; cmake ..; make; ./Calc
 
 profile: $(DEPS)
