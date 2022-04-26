@@ -5,24 +5,27 @@
 # 	git				sudo apt install git
 #	doxygen			sudo apt install doxygen
 
-EXEC1 = calc
-EXEC2 = profiling
+EXEC = profiling
 CXX = g++
 CXXFLAGS = -Wall -g -Wextra
 DEPS = $(wildcard *.h)
+DEPS := $(DEPS) $(patsubst %.h,%.cpp,$(DEPS))
+
+.PHONY: doc
 
 all:
-	make $(EXEC1)
+	make build_test
+	make build_gui
 	make profile
-
-$(EXEC1): $(DEPS)
+	make doc
 
 pack:
 	make clean
 	mkdir ../../xcerba00_xproko47_xczajk01
 	mkdir ../../xcerba00_xproko47_xczajk01/repo
 	cd ..; cp -r * ../xcerba00_xproko47_xczajk01/repo/
-	cd ..; cp -r .git ../xcerba00_xproko47_xczajk01/repo/
+	git log --pretty=format:"%h - %an, %ar : %s" --all > history.txt
+	mv history.txt ../../xcerba00_xproko47_xczajk01/repo
 	make doc
 	cd ..; mv doc/ ../xcerba00_xproko47_xczajk01
 	mkdir ../../xcerba00_xproko47_xczajk01/installer
@@ -30,8 +33,7 @@ pack:
 	#TODO installer
 
 clean:
-	rm -f $(EXEC1)
-	rm -f $(EXEC2)
+	rm -f $(EXEC)
 	rm -rf ./build/
 	rm -rf ./qt/Calc/build/
 	rm -rf ../doc/
@@ -40,18 +42,27 @@ gtest:
 	if ! [ -d "./googletest/" ]; then \
 	git clone https://github.com/google/googletest.git; fi
 
-test:
+build_test:
 	make gtest
 	mkdir -p build
-	cd build; cmake ..; make; ./calc_tests
+	cd build; cmake ..; make
+
+test:
+	make build_test
+	cd build; ./calc_tests
+
 doc:
 	mkdir -p ../doc
 	cd ../doc
 	doxygen ../src/Doxyfile
 
-run:
+build_gui:
 	mkdir -p ./qt/Calc/build
-	cd qt/Calc/build; cmake ..; make; ./Calc
+	cd qt/Calc/build; cmake ..; make
+
+run:
+	make build_gui
+	cd qt/Calc/build; ./Calc
 
 profile: $(DEPS)
-	$(CXX) $(CXXFLAGS) $(EXEC2).cpp -o $(EXEC2)
+	$(CXX) $(CXXFLAGS) $(EXEC).cpp $(DEPS) -o $(EXEC)
