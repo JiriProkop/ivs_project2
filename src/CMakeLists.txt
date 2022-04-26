@@ -7,3 +7,6 @@ include_directories(googletest/include)
 
 add_executable(calc_tests calc_tests.cpp)
 target_link_libraries(calc_tests gtest_main)
+
+add_library(calc_functions calc_funcs.cpp)
+target_link_libraries(calc_tests calc_functions)
