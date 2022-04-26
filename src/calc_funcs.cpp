@@ -44,7 +44,7 @@ double modulo(double a, double b)
     if(b == 0){
         throw std::invalid_argument("divisor cannot be 0");
     }
-    if(!(compare_double(a, round(a))) || !(compare_double(b, round(b))))
+    if(!(is_int(a)) || !(is_int(b)))
     {
         throw std::invalid_argument("only natural numbers");
     }
@@ -72,7 +72,7 @@ double divide(double a, double b)
 
 double nth_power(double a, double b){
     double result = a;
-    if(!(compare_double(b, round(b))))
+    if(!(is_int(b)))
     {
         throw std::invalid_argument("exponent has to be a natural number");
     }
@@ -101,7 +101,7 @@ double nth_power(double a, double b){
 
 double nth_root(double x, double n)
 {
-    if(!(compare_double(n, round(n))))
+    if(!(is_int(n)))
     {
         throw std::invalid_argument("The root has to be a natural number!");
     }
@@ -140,7 +140,7 @@ double fac(double n)
     {
         throw std::invalid_argument("The number has to be positive or zero!");
     }
-    if(!(compare_double(n, round(n))))
+    if(!(is_int(n)))
     {
         throw std::invalid_argument("The number has to be a natural number!");
     }
