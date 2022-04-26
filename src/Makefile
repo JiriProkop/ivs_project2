@@ -26,7 +26,7 @@ pack:
 	make doc
 	cd ..; mv doc/ ../xcerba00_xproko47_xczajk01
 	mkdir ../../xcerba00_xproko47_xczajk01/installer
-	cd ../..; zip -rm xcerba00_xproko47_xczajk01 xcerba00_xproko47_xczajk01
+	cd ../..; zip -rm xproko47_xcerba00_xczajk01 xcerba00_xproko47_xczajk01
 	#TODO installer
 
 clean:
