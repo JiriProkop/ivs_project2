@@ -79,8 +79,12 @@ double nth_power(double a, double b){
     if(b < 0){
         throw std::invalid_argument("exponent has to be a natural number");
     }
-    if(b == 0){
+    if(compare_double(b, 0) || compare_double(a, 1)){
         return 1;
+    }
+    else if(compare_double(a, 0))
+    {
+        return 0;
     }
     double max = 99999999999999999999.0;
     for(double i = 1; i < b; i++){
