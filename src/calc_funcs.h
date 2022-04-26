@@ -11,6 +11,7 @@
 #include <stdexcept>
 #include <string>
 
+
 #define ACCURACY 0.000001
 
 /**

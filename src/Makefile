@@ -9,14 +9,25 @@ EXEC1 = calc
 EXEC2 = profiling
 CXX = g++
 CXXFLAGS = -Wall -g -Wextra
-
+DEPS = $(wildcard *.h)
 
 all:
-	$(CXX) $(CXXFLAGS) $(EXEC1).cpp -o $(EXEC1)
+	make $(EXEC1)
 	make profile
 
+$(EXEC1): $(DEPS)
+
 pack:
-	#TODO zip files to be submitted
+	make clean
+	mkdir ../../xcerba00_xproko47_xczajk01
+	mkdir ../../xcerba00_xproko47_xczajk01/repo
+	cd ..; cp -r * ../xcerba00_xproko47_xczajk01/repo/
+	cd ..; cp -r .git ../xcerba00_xproko47_xczajk01/repo/
+	make doc
+	cd ..; mv doc/ ../xcerba00_xproko47_xczajk01
+	mkdir ../../xcerba00_xproko47_xczajk01/installer
+	cd ../..; zip -rm xcerba00_xproko47_xczajk01 xcerba00_xproko47_xczajk01
+	#TODO installer
 
 clean:
 	rm -f $(EXEC1)
@@ -37,12 +48,13 @@ test:
 doc:
 	if ! [ -d "../doc/" ]; then \
 	mkdir ../doc; fi
-	#TODO generate documentation
+	cd ../doc
+	doxygen ../src/Doxyfile
 
 run:
 	if ! [ -d "./qt/build/" ]; then \
 	mkdir ./qt/Calc/build; fi
 	cd qt/Calc/build; cmake ..; make; ./Calc
 
-profile: calc_funcs.h
+profile: $(DEPS)
 	$(CXX) $(CXXFLAGS) $(EXEC2).cpp -o $(EXEC2)
