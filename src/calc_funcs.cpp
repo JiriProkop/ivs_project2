@@ -70,9 +70,8 @@ double divide(double a, double b)
     return a / b;
 }
 
-double nth_power(double a, double b)
-{
-    long double result = a;
+double nth_power(double a, double b){
+    double result = a;
     if(!(compare_double(b, round(b))))
     {
         throw std::invalid_argument("exponent has to be a natural number");
@@ -83,12 +82,13 @@ double nth_power(double a, double b)
     if(b == 0){
         return 1;
     }
-    for(int i = 1; i < (int)b; i++){
+    double max = 99999999999999999999.0;
+    for(double i = 1; i < b; i++){
         result = result * 100000000.0;
-        std::round(result);
+        result = round(result);
         result = result / 100000000.0;
         result = result * a;
-        if(result > 99999999999999999999.0  || result < -99999999999999999999.0){
+        if(result > max  || result < -max){
             throw std::invalid_argument("result too big");
         }
     }
