@@ -13,6 +13,11 @@ bool compare_double(double a, double b)
     return fabs(a - b) < ACCURACY;
 }
 
+bool is_int(double a)
+{
+    return compare_double(a, round(a));
+}
+
 double modulo(double a, double b)
 {
     if(b == 0){

@@ -22,6 +22,14 @@
 bool compare_double(double a, double b);
 
 /**
+ * A function for telling whether double is an integer or not.
+ *
+ * @param a A number.
+ * @return Returns true if the number is an integer(with precision of macro ACCURACY).
+ */
+bool is_int(double a);
+
+/**
  * A function for remainder after division.
  * a % b
  *
