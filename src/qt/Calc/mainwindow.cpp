@@ -27,19 +27,20 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->plus, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("+"); });
     connect(ui->minus, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("-"); });
-    connect(ui->multiply, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("X"); });
+    connect(ui->multiply, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("*"); });
     connect(ui->divide, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("/"); });
     connect(ui->modulo, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("mod"); });
     connect(ui->nthPower, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("^"); });
     connect(ui->nthRoot, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("√"); });
     connect(ui->factorial, &QPushButton::clicked, this, [this] {MainWindow::putPrevNum("!"); });
 
+    connect(ui->inputField, &QLineEdit::textChanged, this, &MainWindow::checkForOperation);
 
     connect(ui->equals, &QPushButton::clicked ,this, &MainWindow::evaluateSolution);
 
     connect(ui->help, &QPushButton::clicked ,this, [this] {system("xdg-open /home/patrik/Skola/IVS/2/ivs_project2/dokumentace.pdf"); }); // TODO
 
-    QRegularExpression rx("-?[0-9]{1,20}(\\.[0-9]{1,8})|()");
+    QRegularExpression rx("-?[0-9]{1,20}(\\.[0-9]{0,8}\\+?\\-?\\*?\\/?)|()");
     QValidator *validator = new QRegularExpressionValidator(rx, this);
     ui->inputField->setValidator(validator);
 
@@ -58,6 +59,11 @@ void MainWindow::putNumber(const QString &number)
 void MainWindow::putDot()
 {
     ui->inputField->insert(".");
+}
+
+void MainWindow::checkForOperation()
+{
+    return;
 }
 
 void MainWindow::putPrevNum(const QString &operation)
@@ -87,6 +93,7 @@ int display_result(double result)
     }
 }
 
+
 void MainWindow::evaluateSolution()
 {
     if(QString::compare(ui->prevNum->text(), "") == 0 || QString::compare(ui->prevNum->text(), "- -") == 0
@@ -108,26 +115,54 @@ void MainWindow::evaluateSolution()
     {
         ui->prevNum2->setText(ui->inputField->text() + " =");
         result = plus(a, b);
-        ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+        if(get_number_length(result) < 21)
+        {
+            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+        }
+        else
+        {
+            ui->prevNum2->setText("Math error!");
+        }
     }
     else if(QString::compare(ui->prevNum->text().split(" ")[1], "-") == 0)
     {
         ui->prevNum2->setText(ui->inputField->text() + " =");
         result = sub(a, b);
-        ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+        if(get_number_length(result) < 21)
+        {
+            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+        }
+        else
+        {
+            ui->prevNum2->setText("Math error!");
+        }
     }
-    else if(QString::compare(ui->prevNum->text().split(" ")[1], "X") == 0)
+    else if(QString::compare(ui->prevNum->text().split(" ")[1], "*") == 0)
     {
         ui->prevNum2->setText(ui->inputField->text() + " =");
         result = mul(a, b);
-        ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+        if(get_number_length(result) < 21)
+        {
+            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+        }
+        else
+        {
+            ui->prevNum2->setText("Math error!");
+        }
     }
     else if(QString::compare(ui->prevNum->text().split(" ")[1], "/") == 0)
     {
         ui->prevNum2->setText(ui->inputField->text() + " =");
         try {
             result = divide(a, b);
-            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+            if(get_number_length(result) < 21)
+            {
+                ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+            }
+            else
+            {
+                ui->prevNum2->setText("Math error!");
+            }
         }
         catch (std::invalid_argument) {
             ui->prevNum2->setText("Math error!");
@@ -138,7 +173,14 @@ void MainWindow::evaluateSolution()
         ui->prevNum2->setText(ui->inputField->text() + " =");
         try {
             result = modulo(a, b);
-            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+            if(get_number_length(result) < 21)
+            {
+                ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+            }
+            else
+            {
+                ui->prevNum2->setText("Math error!");
+            }
         }
         catch (std::invalid_argument) {
             ui->prevNum2->setText("Math error!");
@@ -149,7 +191,14 @@ void MainWindow::evaluateSolution()
         ui->prevNum2->setText(ui->inputField->text() + " =");
         try {
             result = nth_power(a, b);
-            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+            if(get_number_length(result) < 21)
+            {
+                ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+            }
+            else
+            {
+                ui->prevNum2->setText("Math error!");
+            }
         }
         catch (std::invalid_argument) {
             ui->prevNum2->setText("Math error!");
@@ -160,7 +209,14 @@ void MainWindow::evaluateSolution()
         ui->prevNum2->setText(ui->inputField->text() + " =");
         try {
             result = nth_power(a, b);
-            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+            if(get_number_length(result) < 21)
+            {
+                ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+            }
+            else
+            {
+                ui->prevNum2->setText("Math error!");
+            }
         }
         catch (std::invalid_argument) {
             ui->prevNum2->setText("Math error!");
@@ -171,7 +227,14 @@ void MainWindow::evaluateSolution()
         ui->prevNum2->setText(ui->inputField->text() + " =");
         try {
             result = nth_root(b, a);
-            ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+            if(get_number_length(result) < 21)
+            {
+                ui->inputField->setText(QString().setNum(result, 'f', display_result(result)));
+            }
+            else
+            {
+                ui->prevNum2->setText("Math error!");
+            }
         }
         catch (std::invalid_argument) {
             ui->prevNum2->setText("Math error!");
@@ -179,7 +242,7 @@ void MainWindow::evaluateSolution()
     }
     else if(QString::compare(ui->prevNum->text().split(" ")[1], "!") == 0)
     {
-        ui->prevNum2->setText(ui->prevNum->text() + " =");
+        ui->prevNum->setText(ui->prevNum->text() + " =");
         try {
             ui->inputField->setText(QString().setNum(fac(a), 'f', 0));
         }
@@ -191,6 +254,6 @@ void MainWindow::evaluateSolution()
 }
 
 // TODO:
-//       check whether the number is too big.
 //
-//       the equation does not fit the label sometimes
+//       keyboard control
+//
