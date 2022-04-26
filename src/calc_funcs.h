@@ -90,7 +90,7 @@ double divide(double a, double b){
  * @param b natural exponent.
  * @return Returns the value of expression a^b.
  */
-double nth_power(double a, double b){
+double nth_power(long double a, long double b){
     long double result = a;
     if(!(compare_double(b, round(b))))
     {
@@ -102,12 +102,13 @@ double nth_power(double a, double b){
     if(b == 0){
         return 1;
     }
-    for(int i = 1; i < (int)b; i++){
+    long double max = 99999999999999999999.0;
+    for(long double i = 1; i < b; i++){
        result = result * 100000000.0;
-       std::round(result);
+       result = round(result);
        result = result / 100000000.0;
        result = result * a;
-       if(result > 99999999999999999999.0  || result < -99999999999999999999.0){
+       if(result > max  || result < -max){
            throw std::invalid_argument("result too big");
        }
     }
