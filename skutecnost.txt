@@ -1,1 +1,21 @@
-tento soubor bude obsahovat rozdil mezi planem projektu a skutecnosti
+Dodržení termínů:
+    Testy:
+        Jelikož jsme měli spoustu práce i z jiných předmětů, testy jsme začali 
+        dělat až 14. 4., tedy 14 dní po deadlinu. Dokončili jsme je cca po
+        třech dnech.
+    Funkce:
+        Funkce jsme začali dělat ihned po dokončení testů. Většina funkcí byla
+        hotova 19. 4., tedy 9 dní po deadlinu. Některé funkce jsme ale dokončili 
+        až později. Šlo hlavně o modulo(funkce navíc), na které jsme při plánování
+        zapomněli, a o mocninu, u které jsme řešili problém s přetékáním.
+    Hotový projekt:
+        Deadlinu projektu jsme samozřejmě nestihli, na projektu jsme pracovali
+        téměř až do odevzdání.
+
+Úkoly:
+    Stanovené rozložení úkolů jsme dodrželi.
+
+Ostatní:
+    Při plánování jsme zapomněli i na make, mockapy, GUI, dokumentaci a tvorbu
+    instalačního balíčku. Na pravidelných schůzkách jsme proto tyto úkoly museli
+    dorozdělit a stanovit si deadliny. Ty jsme už dodržovali.
