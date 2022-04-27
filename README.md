@@ -2,7 +2,6 @@ Prostredi
 ---------
 
 Ubuntu 64bit
-Windows 64bit
 
 Autori
 ------
@@ -16,4 +15,4 @@ Nazev tymu: Gde_body
 Licence
 -------
 
-Tento program je poskytovan...
+Tento program je poskytován s licencí GNU General Public Licence version 2.
