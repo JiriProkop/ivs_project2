@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setFixedSize(this->width(),this->height());
 
     connect(ui->one, &QPushButton::clicked ,this, [this] {MainWindow::putNumber("1"); });
     connect(ui->two, &QPushButton::clicked ,this, [this] {MainWindow::putNumber("2"); });
