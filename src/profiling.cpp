@@ -28,7 +28,10 @@ int main()
             number_str[i++] = character;
             character = getchar();
         }
-        number_str[i] = '\0';
+        if (i != 0)
+        {
+            number_str[i] = '\0';
+        }
 
         num_of_numbers += 1;
         number = std::stod(number_str); // convert
