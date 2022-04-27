@@ -7,7 +7,7 @@
 
 EXEC = profiling
 CXX = g++
-CXXFLAGS = -Wall -g -Wextra
+CXXFLAGS = -Wall -g -Wextra -pg #TODO remove -pg
 DEPS = $(wildcard *.h)
 DEPS := $(DEPS) $(patsubst %.h,%.cpp,$(DEPS))
 PACK_NAME = xproko47_xcerba00_xczajk01
@@ -24,6 +24,7 @@ pack:
 	make clean
 	mkdir ../../$(PACK_NAME)
 	mkdir ../../$(PACK_NAME)/repo
+	rm -rf ./googletest/
 	cd ..; cp -r * ../$(PACK_NAME)/repo/
 	git log --pretty=format:"%h - %an, %ar : %s" --all > history.txt
 	mv history.txt ../../$(PACK_NAME)/repo
