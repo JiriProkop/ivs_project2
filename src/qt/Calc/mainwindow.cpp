@@ -387,6 +387,7 @@ void MainWindow::evaluateSolution()
         try {
             ui->inputField->setText(QString().setNum(fac(a), 'f', 0));
         }
+        // catch errors
         catch (std::invalid_argument x) {
             ui->prevNum->clear();
             ui->inputField->clear();
