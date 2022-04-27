@@ -12,10 +12,10 @@
 #include <string>
 
 
-#define ACCURACY 0.000001
+#define ACCURACY 0.00000001
 
 /**
- * A function for comparing two double values with the accuracy of 0.000001.
+ * A function for comparing two double values with the accuracy given in ACCURACY macro.
  *
  * @param a First value.
  * @param b Second value.
