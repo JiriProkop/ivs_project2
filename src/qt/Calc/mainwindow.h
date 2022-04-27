@@ -1,3 +1,8 @@
+/**
+ * @file mainwindow.h
+ * @author Patrik Čerbák (xcerba00), Jiří Prokop (xproko47)
+ * @brief  the main window of the calculator
+ */
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
