@@ -61,6 +61,8 @@ doc:
 build_gui:
 	mkdir -p ./qt/Calc/build
 	cd qt/Calc/build; cmake ..; make
+	mkdir -p ./qt/CalcUninstall/build
+	cd qt/CalcUninstall/build; cmake ..; make
 
 run:
 	make build_gui
