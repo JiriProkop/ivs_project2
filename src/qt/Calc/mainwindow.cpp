@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->equals, &QPushButton::clicked ,this, &MainWindow::evaluateSolution);
 
     // connect the help button
-    connect(ui->help, &QPushButton::clicked ,this, [this] {system("xdg-open /home/patrik/Skola/IVS/2/ivs_project2/dokumentace.pdf"); }); // TODO
+    connect(ui->help, &QPushButton::clicked ,this, [this] {system("xdg-open /usr/share/calc/documentation.pdf"); });
 
     // regular expression to validate the input
     QRegularExpression rx("-?[0-9]{1,20}((\\.[0-9]{0,8}[+,\\-,*,/,=]?)|([+,\\-,*,/,=]?))");
