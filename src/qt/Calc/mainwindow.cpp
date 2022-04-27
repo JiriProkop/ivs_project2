@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->help, &QPushButton::clicked ,this, [this] {system("xdg-open /home/patrik/Skola/IVS/2/ivs_project2/dokumentace.pdf"); }); // TODO
 
-    QRegularExpression rx("-?[0-9]{1,20}(\\.[0-9]{0,8}\\+?\\-?\\*?\\/?)|()");
+    QRegularExpression rx("-?[0-9]{1,20}((\\.[0-9]{0,8}[+,\\-,*,/,=]?)|([+,\\-,*,/,=]?))");
     QValidator *validator = new QRegularExpressionValidator(rx, this);
     ui->inputField->setValidator(validator);
 
@@ -63,7 +63,45 @@ void MainWindow::putDot()
 
 void MainWindow::checkForOperation()
 {
-    return;
+    QString str = ui->inputField->text();
+    int i = 0;
+    while(i < str.size())
+    {
+        if(str[i] == '+')
+        {
+            ui->inputField->backspace();
+            MainWindow::putPrevNum("+");
+            return;
+        }
+        else if(str[i] == '-')
+        {
+            if(str[0] != '-')
+            {
+                ui->inputField->backspace();
+                MainWindow::putPrevNum("-");
+            }
+            return;
+        }
+        else if(str[i] == '*')
+        {
+            ui->inputField->backspace();
+            MainWindow::putPrevNum("*");
+            return;
+        }
+        else if(str[i] == '/')
+        {
+            ui->inputField->backspace();
+            MainWindow::putPrevNum("/");
+            return;
+        }
+        else if(str[i] == '=')
+        {
+            ui->inputField->backspace();
+            MainWindow::evaluateSolution();
+            return;
+        }
+        i++;
+    }
 }
 
 void MainWindow::putPrevNum(const QString &operation)
@@ -96,12 +134,18 @@ int display_result(double result)
 
 void MainWindow::evaluateSolution()
 {
+    if(QString::compare(ui->prevNum2->text(), "") != 0)
+    {
+        return;
+    }
     if(QString::compare(ui->prevNum->text(), "") == 0 || QString::compare(ui->prevNum->text(), "- -") == 0
        || QString::compare(ui->inputField->text(), "") == 0 || QString::compare(ui->inputField->text(), "-") == 0)
     {
         if(!(QString::compare(ui->prevNum->text(), "") != 0 && QString::compare(ui->prevNum->text().split(" ")[1], "!") == 0
              && QString::compare(ui->inputField->text(), "") == 0))
         {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Syntax error!");
             alreadyOperation = 0;
             return;
@@ -121,6 +165,8 @@ void MainWindow::evaluateSolution()
         }
         else
         {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -134,6 +180,8 @@ void MainWindow::evaluateSolution()
         }
         else
         {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -147,6 +195,8 @@ void MainWindow::evaluateSolution()
         }
         else
         {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -161,10 +211,14 @@ void MainWindow::evaluateSolution()
             }
             else
             {
+                ui->prevNum->clear();
+                ui->inputField->clear();
                 ui->prevNum2->setText("Math error!");
             }
         }
         catch (std::invalid_argument) {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -179,10 +233,14 @@ void MainWindow::evaluateSolution()
             }
             else
             {
+                ui->prevNum->clear();
+                ui->inputField->clear();
                 ui->prevNum2->setText("Math error!");
             }
         }
         catch (std::invalid_argument) {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -197,10 +255,14 @@ void MainWindow::evaluateSolution()
             }
             else
             {
+                ui->prevNum->clear();
+                ui->inputField->clear();
                 ui->prevNum2->setText("Math error!");
             }
         }
         catch (std::invalid_argument) {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -215,10 +277,14 @@ void MainWindow::evaluateSolution()
             }
             else
             {
+                ui->prevNum->clear();
+                ui->inputField->clear();
                 ui->prevNum2->setText("Math error!");
             }
         }
         catch (std::invalid_argument) {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -233,10 +299,14 @@ void MainWindow::evaluateSolution()
             }
             else
             {
+                ui->prevNum->clear();
+                ui->inputField->clear();
                 ui->prevNum2->setText("Math error!");
             }
         }
         catch (std::invalid_argument) {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -247,13 +317,10 @@ void MainWindow::evaluateSolution()
             ui->inputField->setText(QString().setNum(fac(a), 'f', 0));
         }
         catch (std::invalid_argument x) {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
     alreadyOperation = 0;
 }
-
-// TODO:
-//
-//       keyboard control
-//
