@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->setFixedSize(this->width(),this->height());
 
     // run the system command to uninstall calc
-    connect(ui->yes, &QPushButton::clicked ,this, [this] {system("sudo dpkg -r calc"); QApplication::quit();});
+    connect(ui->yes, &QPushButton::clicked ,this, [this] {QProcess::startDetached("pkexec --user root dpkg -r calc"); QApplication::quit();});
 
     // exit this uninstaller
     connect(ui->no, &QPushButton::clicked, this, QApplication::quit);
