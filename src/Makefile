@@ -7,7 +7,7 @@
 
 EXEC = profiling
 CXX = g++
-CXXFLAGS = -Wall -g -Wextra -pg #TODO remove -pg
+CXXFLAGS = -Wall -g -Wextra
 DEPS = $(wildcard *.h)
 DEPS := $(DEPS) $(patsubst %.h,%.cpp,$(DEPS))
 PACK_NAME = xproko47_xcerba00_xczajk01
@@ -30,9 +30,8 @@ pack:
 	mv history.txt ../../$(PACK_NAME)/repo
 	make doc
 	cd ..; mv doc/ ../$(PACK_NAME)
-	mkdir ../../$(PACK_NAME)/installer
+	cp -r ../install/ ../../$(PACK_NAME)
 	cd ../..; zip -rm $(PACK_NAME) $(PACK_NAME)
-	#TODO installer
 
 clean:
 	rm -f $(EXEC)
