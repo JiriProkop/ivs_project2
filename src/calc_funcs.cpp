@@ -1,7 +1,7 @@
 /**
  * @file calc_funcs.cpp
  * @author Jiří Prokop (xproko47), Patrik Čerbák (xcerba00), Štěpán Czajkowski (xczajk01)
- * @brief  matematická knihovna
+ * @brief  Mathematical library.
  */
 
 #include "calc_funcs.h"
