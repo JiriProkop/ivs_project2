@@ -75,8 +75,11 @@ void MainWindow::checkForOperation()
         }
         else if(str[i] == '-')
         {
-            ui->inputField->backspace();
-            MainWindow::putPrevNum("-");
+            if(str[0] != '-')
+            {
+                ui->inputField->backspace();
+                MainWindow::putPrevNum("-");
+            }
             return;
         }
         else if(str[i] == '*')
@@ -131,12 +134,18 @@ int display_result(double result)
 
 void MainWindow::evaluateSolution()
 {
+    if(QString::compare(ui->prevNum2->text(), "") != 0)
+    {
+        return;
+    }
     if(QString::compare(ui->prevNum->text(), "") == 0 || QString::compare(ui->prevNum->text(), "- -") == 0
        || QString::compare(ui->inputField->text(), "") == 0 || QString::compare(ui->inputField->text(), "-") == 0)
     {
         if(!(QString::compare(ui->prevNum->text(), "") != 0 && QString::compare(ui->prevNum->text().split(" ")[1], "!") == 0
              && QString::compare(ui->inputField->text(), "") == 0))
         {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Syntax error!");
             alreadyOperation = 0;
             return;
@@ -156,6 +165,8 @@ void MainWindow::evaluateSolution()
         }
         else
         {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -169,6 +180,8 @@ void MainWindow::evaluateSolution()
         }
         else
         {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -182,6 +195,8 @@ void MainWindow::evaluateSolution()
         }
         else
         {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -196,10 +211,14 @@ void MainWindow::evaluateSolution()
             }
             else
             {
+                ui->prevNum->clear();
+                ui->inputField->clear();
                 ui->prevNum2->setText("Math error!");
             }
         }
         catch (std::invalid_argument) {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -214,10 +233,14 @@ void MainWindow::evaluateSolution()
             }
             else
             {
+                ui->prevNum->clear();
+                ui->inputField->clear();
                 ui->prevNum2->setText("Math error!");
             }
         }
         catch (std::invalid_argument) {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -232,10 +255,14 @@ void MainWindow::evaluateSolution()
             }
             else
             {
+                ui->prevNum->clear();
+                ui->inputField->clear();
                 ui->prevNum2->setText("Math error!");
             }
         }
         catch (std::invalid_argument) {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -250,10 +277,14 @@ void MainWindow::evaluateSolution()
             }
             else
             {
+                ui->prevNum->clear();
+                ui->inputField->clear();
                 ui->prevNum2->setText("Math error!");
             }
         }
         catch (std::invalid_argument) {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -268,10 +299,14 @@ void MainWindow::evaluateSolution()
             }
             else
             {
+                ui->prevNum->clear();
+                ui->inputField->clear();
                 ui->prevNum2->setText("Math error!");
             }
         }
         catch (std::invalid_argument) {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
@@ -282,6 +317,8 @@ void MainWindow::evaluateSolution()
             ui->inputField->setText(QString().setNum(fac(a), 'f', 0));
         }
         catch (std::invalid_argument x) {
+            ui->prevNum->clear();
+            ui->inputField->clear();
             ui->prevNum2->setText("Math error!");
         }
     }
