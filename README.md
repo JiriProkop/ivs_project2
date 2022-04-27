@@ -1,18 +1,18 @@
-Prostredi
+Environment
 ---------
 
 Ubuntu 64bit
 
-Autori
+Authors
 ------
 
-Nazev tymu: Gde_body
+Team name: Gde_body
 
-- xcerba00 Patrik Čerbák - PCerD01
-- xproko47 Jiří Prokop - 'Just-you-wait'
-- xczajk01 Štěpán Czajkowski - stepnep
+- xcerba00 Patrik Cerbak - PCerD01
+- xproko47 Jiri Prokop - 'Just-you-wait'
+- xczajk01 Stepan Czajkowski - stepnep
 
-Licence
+License
 -------
 
-Tento program je poskytován s licencí GNU General Public Licence version 2.
+This program is licensed under the GNU General Public License version 2.
