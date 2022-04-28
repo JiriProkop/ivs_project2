@@ -31,6 +31,7 @@ pack:
 	make doc
 	cd ..; mv doc/ ../$(PACK_NAME)
 	cp -r ../install/ ../../$(PACK_NAME)
+	cd ../../$(PACK_NAME)/repo; mv documentation.pdf ../doc
 	cd ../..; zip -rm $(PACK_NAME) $(PACK_NAME)
 
 clean:
