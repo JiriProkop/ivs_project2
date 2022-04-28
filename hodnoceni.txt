@@ -1,4 +1,3 @@
-xlogin01 100 (základ GUI a základní mat. operace)
-xlogin02 100 (pokročilé mat. operace)
-xlogin03 90 (profiling, instalátor)
-xlogin04 110 (testy, dokumentace)
+xcerba00 100 (některé operace a testy, dokumentace, GUI, instalátor, profiling)
+xproko47 100 (některé operace a testy, profiling, Makefile)
+xczajk01 100 (některé operace a testy, návrh vzhledu GUI, příručka)
